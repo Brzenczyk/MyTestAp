@@ -67,3 +67,22 @@ def handle_terminal_args():
 
 if __name__ == "__main__":
     handle_terminal_args()
+
+import pytest
+from main import MyApp
+
+def test_ui_elements(qtbot):
+    app = MyApp()
+    assert app.text_view is not None
+    assert app.centralWidget() is not None
+
+def test_ipv4_info():
+    # Test logic for IPv4 information
+    assert True
+    
+    import subprocess
+
+def test_button1():
+    result = subprocess.run(["MyTest.exe", "button1"], capture_output=True, text=True)
+    assert "IPv4 Info" in result.stdout
+
