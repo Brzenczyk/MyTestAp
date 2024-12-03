@@ -1,4 +1,4 @@
-nname: Build MyTest App
+name: Build MyTest App
 
 on:
   push:
