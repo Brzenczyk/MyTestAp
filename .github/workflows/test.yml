@@ -1,1 +1,33 @@
+name: Test MyTest Application
 
+on:
+  push:
+    branches:
+      - main  # Testuj automatycznie po wypchnięciu zmian do gałęzi main
+  schedule:
+    - cron: '0 12 * * 0'  # Testuj automatycznie co tydzień (np. w niedzielę o 12:00)
+  workflow_dispatch:  # Pozwala uruchomić ręcznie z poziomu GitHub
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install PyQt5 pytest
+
+    - name: Run unit tests
+      run: pytest
+
+    - name: Test application CLI
+      run: |
+        python main.py button1
+        python main.py help
