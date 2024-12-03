@@ -29,5 +29,5 @@ jobs:
 
     - name: Test application CLI
       run: |
-        python main.py button1
-        python main.py help
+        python test_main.py button1
+        python test_main.py help

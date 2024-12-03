@@ -1,5 +1,8 @@
 from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QPushButton, QTextEdit, QWidget
 import sys
+import subprocess
+import pytest
+import argparse
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -48,13 +51,6 @@ class MyApp(QMainWindow):
     def show_host_name(self):
         self.text_view.append("Host Name: Placeholder")
 
-if __name__ == "__main__":
-    app = QApplication(sys.argv)
-    window = MyApp()
-    window.show()
-    sys.exit(app.exec_())
-import argparse
-
 def handle_terminal_args():
     parser = argparse.ArgumentParser(description="MyTest Application CLI")
     parser.add_argument("command", choices=["button1", "button2", "button3", "button4", "button5", "help"])
@@ -65,13 +61,7 @@ def handle_terminal_args():
     else:
         print(f"Command {args.command} executed.")
 
-if __name__ == "__main__":
-    handle_terminal_args()
-
-import pytest
-from main import MyApp
-
-def test_ui_elements(qtbot):
+def test_ui_elements():
     app = MyApp()
     assert app.text_view is not None
     assert app.centralWidget() is not None
@@ -80,9 +70,15 @@ def test_ipv4_info():
     # Test logic for IPv4 information
     assert True
     
-    import subprocess
+    
 
 def test_button1():
     result = subprocess.run(["MyTest.exe", "button1"], capture_output=True, text=True)
     assert "IPv4 Info" in result.stdout
 
+if __name__ == "__main__":
+    handle_terminal_args()
+    app = QApplication(sys.argv)
+    window = MyApp()
+    window.show()
+    sys.exit(app.exec_())
