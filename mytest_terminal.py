@@ -1,3 +1,5 @@
+# mytest_terminal.py
+
 import argparse
 
 def handle_terminal_args(args):
@@ -17,7 +19,7 @@ if __name__ == "__main__":
         "command",
         type=str,
         nargs="?",
-        default="help", 
+        default="help",  # Domyślny argument to "help"
         help="Command to execute"
     )
     args = parser.parse_args()

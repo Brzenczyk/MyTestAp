@@ -12,14 +12,18 @@ class MyTestApp(QMainWindow):
         self.setWindowTitle("MyTest - Info Checker")
         self.setGeometry(100, 100, 600, 400)
 
+        # Central widget
         central_widget = QWidget(self)
         self.setCentralWidget(central_widget)
 
+        # Layout
         layout = QVBoxLayout()
 
+        # Text browser
         self.text_browser = QTextBrowser(self)
         layout.addWidget(self.text_browser)
 
+        # Buttons
         self.buttons = {
             "IPv4 Info": self.show_ipv4_info,
             "Proxy Info": self.show_proxy_info,
@@ -38,11 +42,13 @@ class MyTestApp(QMainWindow):
     def append_output(self, text):
         self.text_browser.append(text)
 
+    # Button functionalities
     def show_ipv4_info(self):
         ip = socket.gethostbyname(socket.gethostname())
         self.append_output(f"IPv4 Address: {ip} (Static/Dynamic detection not implemented)")
 
     def show_proxy_info(self):
+        # Example stub
         self.append_output("Proxy Info: Not detected")
 
     def show_system_info(self):
