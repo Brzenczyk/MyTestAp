@@ -1,8 +1,23 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QPushButton, QTextEdit, QWidget
-import sys
 import subprocess
 import pytest
-import argparse
+from PyQt5.QtWidgets import QApplication
+from main import MyApp  # Upewnij się, że masz poprawny import
+
+# Test interfejsu
+def test_ui_elements():
+    app = QApplication([])  # Tworzenie aplikacji PyQt5
+    window = MyApp()  # Tworzenie okna aplikacji
+    assert window.text_view is not None
+    assert window.centralWidget() is not None
+
+# Test uruchamiania funkcji (np. IPv4)
+def test_ipv4_info():
+    assert True  # Zastąp tym, co chcesz testować
+
+# Test działania przycisku 1
+def test_button1():
+    result = subprocess.run(["MyTest.exe", "button1"], capture_output=True, text=True)
+    assert "IPv4 Info" in result.stdout  # Sprawdzenie czy wynik zawiera "IPv4 Info"
 
 class MyApp(QMainWindow):
     def __init__(self):
@@ -61,20 +76,6 @@ def handle_terminal_args():
     else:
         print(f"Command {args.command} executed.")
 
-def test_ui_elements():
-    app = MyApp()
-    assert app.text_view is not None
-    assert app.centralWidget() is not None
-
-def test_ipv4_info():
-    # Test logic for IPv4 information
-    assert True
-    
-    
-
-def test_button1():
-    result = subprocess.run(["MyTest.exe", "button1"], capture_output=True, text=True)
-    assert "IPv4 Info" in result.stdout
 
 if __name__ == "__main__":
     handle_terminal_args()
