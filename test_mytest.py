@@ -1,4 +1,3 @@
-# test_mytest.py
 
 import unittest
 from PyQt5.QtWidgets import QApplication
@@ -11,7 +10,7 @@ class TestMyTestApp(unittest.TestCase):
         self.window = MyTestApp()
 
     def test_ui_elements(self):
-        # Test UI setup
+        
         self.assertEqual(self.window.text_browser.toPlainText(), "")
         self.assertEqual(len(self.window.buttons), 5)
 
@@ -20,7 +19,6 @@ class TestMyTestApp(unittest.TestCase):
         output = self.window.text_browser.toPlainText()
         self.assertIn("IPv4 Address:", output)
 
-    # Add more tests for each button functionality
-
-if __name__ == "__main__":
+   
+   if __name__ == "__main__":
     unittest.main()
