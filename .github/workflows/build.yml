@@ -1,1 +1,38 @@
+name: Build MyTest Application
+
+on:
+  push:
+    branches:
+      - main  # Buduj automatycznie po wypchnięciu zmian do gałęzi main
+  schedule:
+    - cron: '0 0 * * 0'  # Buduj automatycznie co tydzień (np. w niedzielę o 00:00)
+  workflow_dispatch:  # Pozwala uruchomić ręcznie z poziomu GitHub
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: pip install PyQt5 pyinstaller
+
+    - name: Run unit tests
+      run: pytest
+
+    - name: Build executable
+      run: pyinstaller --onefile --noconsole main.py
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: MyTestExe
+        path: dist/main.exe
 
