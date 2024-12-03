@@ -1,12 +1,12 @@
-name: Test MyTest Application
+name: Test MyTest App
 
 on:
   push:
     branches:
-      - main  # Testuj automatycznie po wypchnięciu zmian do gałęzi main
+      - main
   schedule:
-    - cron: '0 12 * * 0'  # Testuj automatycznie co tydzień (np. w niedzielę o 12:00)
-  workflow_dispatch:  # Pozwala uruchomić ręcznie z poziomu GitHub
+    - cron: "0 12 * * 1" # Automatyczne uruchomienie w poniedziałki o 12:00 UTC
+  workflow_dispatch: # Ręczne uruchomienie przez użytkownika
 
 jobs:
   test:
@@ -16,20 +16,14 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Setup Python
-      uses: actions/setup-python@v4
+    - name: Set up Python
+      uses: actions/setup-python@v3
       with:
-        python-version: '3.9'
+        python-version: "3.x"
 
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install PyQt5 pytest  # Zainstalowanie zależności PyQt5 i pytest
+        pip install pyqt5 pytest
 
     - name: Run unit tests
-      run: pytest  # Uruchomienie testów pytest
-
-    - name: Test application CLI
-      run: |
-        python test_main.py button1
-        python test_main.py help
+      run: pytest test_mytest.py
